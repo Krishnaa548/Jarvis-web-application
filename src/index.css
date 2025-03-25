@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -118,6 +119,60 @@
   
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Circuit animations */
+  .circuit-line {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circuit-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(14, 165, 233, 0.8), transparent);
+    animation: circuit-pulse 8s infinite linear;
+    animation-delay: calc(var(--circuit-delay, 0) * 1s);
+  }
+  
+  .circuit-node {
+    position: relative;
+    border-radius: 2px;
+    transition: all 0.5s ease;
+  }
+  
+  .pulse-node {
+    background-color: rgba(14, 165, 233, 0.6);
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
+    animation: node-pulse 2s ease-out;
+  }
+  
+  @keyframes circuit-pulse {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  
+  @keyframes node-pulse {
+    0% {
+      transform: scale(1);
+      background-color: rgba(14, 165, 233, 0.6);
+    }
+    50% {
+      transform: scale(1.5);
+      background-color: rgba(14, 165, 233, 0.8);
+    }
+    100% {
+      transform: scale(1);
+      background-color: rgba(14, 165, 233, 0.1);
+    }
   }
   
   /* ElevenLabs widget customization */

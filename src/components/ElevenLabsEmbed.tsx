@@ -13,6 +13,9 @@ const ElevenLabsEmbed: React.FC<ElevenLabsEmbedProps> = ({ agentId, className })
     // Create the elevenlabs-convai element
     const convaiElement = document.createElement('elevenlabs-convai');
     convaiElement.setAttribute('agent-id', agentId);
+    
+    // Add custom class for styling
+    convaiElement.className = 'jarvis-elevenlabs-widget';
 
     // Create script element
     const script = document.createElement('script');
@@ -40,7 +43,9 @@ const ElevenLabsEmbed: React.FC<ElevenLabsEmbedProps> = ({ agentId, className })
   }, [agentId]);
 
   return (
-    <div ref={containerRef} className={className}>
+    <div ref={containerRef} className={`${className} relative transition-all duration-300 hover:scale-105`}>
+      {/* Animated glow behind the widget */}
+      <div className="absolute inset-0 rounded-lg bg-jarvis-blue/5 blur-md -z-10"></div>
       {/* ElevenLabs widget will be injected here */}
     </div>
   );

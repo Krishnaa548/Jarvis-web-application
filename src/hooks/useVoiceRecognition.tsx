@@ -1,6 +1,46 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+// Add type definitions for Web Speech API
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+  resultIndex: number;
+  error?: any;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
+  onresult: ((event: SpeechRecognitionEvent) => void) | null;
+  onend: ((event: Event) => void) | null;
+}
+
+interface SpeechRecognitionResult {
+  isFinal: boolean;
+  [index: number]: SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
+}
+
+interface SpeechRecognitionResultList {
+  length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
 interface UseVoiceRecognitionProps {
   onTranscript: (transcript: string) => void;
   language?: string;
@@ -21,13 +61,13 @@ export default function useVoiceRecognition({
       return;
     }
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognitionRef.current = new SpeechRecognition();
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognitionAPI();
     recognitionRef.current.continuous = true;
     recognitionRef.current.interimResults = true;
     recognitionRef.current.lang = language;
 
-    recognitionRef.current.onresult = (event) => {
+    recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = Array.from(event.results)
         .map(result => result[0])
         .map(result => result.transcript)
@@ -39,7 +79,7 @@ export default function useVoiceRecognition({
       }
     };
 
-    recognitionRef.current.onerror = (event) => {
+    recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('Speech recognition error:', event.error);
       setErrorMessage(`Error: ${event.error}`);
       setIsListening(false);
@@ -92,7 +132,7 @@ export default function useVoiceRecognition({
 // Add missing type definitions
 declare global {
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
+    SpeechRecognition: new () => SpeechRecognition;
+    webkitSpeechRecognition: new () => SpeechRecognition;
   }
 }

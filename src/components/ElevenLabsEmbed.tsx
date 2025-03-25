@@ -10,22 +10,31 @@ const ElevenLabsEmbed: React.FC<ElevenLabsEmbedProps> = ({ agentId, className })
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Create the elevenlabs-convai element
+    const convaiElement = document.createElement('elevenlabs-convai');
+    convaiElement.setAttribute('agent-id', agentId);
+
     // Create script element
     const script = document.createElement('script');
-    script.src = "https://elevenlabs-convai-agent-widget-index.js" 
+    script.src = "https://elevenlabs.io/convai-widget/index.js";
     script.async = true;
     script.type = "text/javascript";
-    script.setAttribute("data-elevenlabs-convai-agent-id", agentId);
     
-    // Append script to container
+    // Append elements to container
     if (containerRef.current) {
+      containerRef.current.appendChild(convaiElement);
       containerRef.current.appendChild(script);
     }
 
-    // Cleanup function to remove script when component unmounts
+    // Cleanup function to remove elements when component unmounts
     return () => {
-      if (containerRef.current && containerRef.current.contains(script)) {
-        containerRef.current.removeChild(script);
+      if (containerRef.current) {
+        if (containerRef.current.contains(convaiElement)) {
+          containerRef.current.removeChild(convaiElement);
+        }
+        if (containerRef.current.contains(script)) {
+          containerRef.current.removeChild(script);
+        }
       }
     };
   }, [agentId]);

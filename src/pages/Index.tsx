@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label";
 
 // Default webhook URL - this should be configurable
 const DEFAULT_WEBHOOK_URL = 'https://echo.zuplo.io';
-// Default ElevenLabs agent ID - this should be configurable
-const DEFAULT_AGENT_ID = 'YWFCQVZNLyZrhZftuL'; // Replace with your actual agent ID
+// Default ElevenLabs agent ID - using the one provided by the user
+const DEFAULT_AGENT_ID = 'YcUJREMTe0ciFijtLDdp';
 
 const Index = () => {
   const [isFirstVisit, setIsFirstVisit] = useState(true);

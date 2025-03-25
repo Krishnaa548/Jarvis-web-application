@@ -1,79 +1,69 @@
-# JARVIS-Inspired Voice-Powered AI Assistant Embedded Web Application
+# Welcome to your Lovable project
 
-Welcome to my project!this repository showcases how to build a voice-controlled AI assistant—reminiscent of JARVIS from Iron Man—using Lovable AI, ElevenLabs, and n8n. The best part? You don't have to write a single line of code!
+## Project info
 
-Overview
-This project demonstrates how to create a fully functional voice assistant that can:
+**URL**: https://lovable.dev/projects/67ed1647-2a35-4d36-afba-6b87a19823f4
 
-Schedule meetings: Automatically trigger n8n workflows to set up meetings.
+## How can I edit this code?
 
-Manage calendar events: Delete any unwanted events.
+There are several ways of editing your application.
 
-Handle emails: Write and reply to emails using voice commands.
+**Use Lovable**
 
-By integrating these powerful tools, you can manage your calendar and emails simply by talking to your assistant.
+Simply visit the [Lovable Project](https://lovable.dev/projects/67ed1647-2a35-4d36-afba-6b87a19823f4) and start prompting.
 
-Features
-Voice-Activated Commands: Leverages ElevenLabs for seamless voice interaction.
+Changes made via Lovable will be committed automatically to this repo.
 
-Intuitive Interface: Built with Lovable AI for a user-friendly experience.
+**Use your preferred IDE**
 
-Automation: Uses n8n to create workflows that handle your scheduling, event management, and email communication.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-No-Code Setup: Perfect for those who want to harness AI and automation without the need for coding skills.
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Technologies Used
-Lovable AI: Creates an engaging, customizable interface for the assistant.
+Follow these steps:
 
-ElevenLabs: Powers voice recognition and text-to-speech capabilities.
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-n8n: Automates workflows for scheduling meetings, managing calendar events, and handling emails.
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-How It Works
-Voice Interaction: Speak commands to your assistant.
+# Step 3: Install the necessary dependencies.
+npm i
 
-Workflow Trigger: Your voice command triggers an n8n workflow.
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-Task Execution: n8n carries out tasks such as scheduling meetings, deleting calendar events, or sending emails.
+**Edit a file directly in GitHub**
 
-Feedback: Receive voice feedback from your assistant via ElevenLabs.
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-Getting Started
-Prerequisites
-Basic understanding of AIML concepts.
+**Use GitHub Codespaces**
 
-A configured n8n instance.
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-Access to Lovable AI and ElevenLabs (refer to the links provided in the project documentation).
+## What technologies are used for this project?
 
-Setup Instructions
-Clone the Repository:
+This project is built with .
 
-bash
-Copy
-Edit
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-git clone https://github.com/Krishnaa548/Jarvis-web-application.git
+## How can I deploy this project?
 
-cd Jarvis-web-application
+Simply open [Lovable](https://lovable.dev/projects/67ed1647-2a35-4d36-afba-6b87a19823f4) and click on Share -> Publish.
 
-Follow the Resource Links:
-Check the documentation for Lovable AI, ElevenLabs, and n8n to understand the integration process.
+## I want to use a custom domain - is that possible?
 
-Deploy the Web Application:
-Copy and paste the provided web application snippet into your development environment to start triggering n8n workflows.
-
-Configure Workflows:
-Customize the n8n workflows to schedule meetings, manage calendar events, and handle email tasks as per your requirements.
-
-Usage
-Once everything is set up:
-
-Speak: Issue voice commands to trigger specific tasks.
-
-Automate: Let n8n do the heavy lifting by scheduling meetings, deleting events, or sending replies.
-
-Enjoy: Experience a hands-free, efficient way to manage your daily tasks, just like having your own JARVIS.
-
-Contribution
-Feel free to fork this repository and submit pull requests if you'd like to add features or improve the integration. Any feedback or suggestions are welcome!
+We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)

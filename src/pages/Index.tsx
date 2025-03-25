@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import JarvisHeader from '../components/JarvisHeader';
-import ChatInterface from '../components/ChatInterface';
+import JarvisInterface from '../components/JarvisInterface';
 import { toast } from 'sonner';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -10,17 +10,23 @@ import { Label } from "@/components/ui/label";
 
 // Default webhook URL - this should be configurable
 const DEFAULT_WEBHOOK_URL = 'https://echo.zuplo.io';
+// Default ElevenLabs agent ID - this should be configurable
+const DEFAULT_AGENT_ID = 'YWFCQVZNLyZrhZftuL'; // Replace with your actual agent ID
 
 const Index = () => {
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [webhookUrl, setWebhookUrl] = useState(
     localStorage.getItem('jarvisWebhookUrl') || DEFAULT_WEBHOOK_URL
   );
+  const [agentId, setAgentId] = useState(
+    localStorage.getItem('jarvisAgentId') || DEFAULT_AGENT_ID
+  );
 
-  const saveWebhookUrl = () => {
+  const saveSettings = () => {
     localStorage.setItem('jarvisWebhookUrl', webhookUrl);
+    localStorage.setItem('jarvisAgentId', agentId);
     setIsFirstVisit(false);
-    toast.success('Webhook URL set successfully');
+    toast.success('Settings saved successfully');
   };
 
   return (
@@ -29,9 +35,9 @@ const Index = () => {
       <JarvisHeader />
       
       {/* Main content */}
-      <main className="flex-1 container mx-auto max-w-4xl px-4 py-6">
+      <main className="flex-1 container mx-auto max-w-7xl px-4 py-6">
         <div className="h-[calc(100vh-160px)] glass rounded-xl overflow-hidden blue-glow">
-          <ChatInterface webhookUrl={webhookUrl} />
+          <JarvisInterface agentId={agentId} />
         </div>
       </main>
       
@@ -44,8 +50,19 @@ const Index = () => {
           
           <div className="space-y-4 py-4">
             <p className="text-sm text-foreground">
-              To get started, please provide a webhook URL for Jarvis to communicate with.
+              To get started, please provide your ElevenLabs agent ID and a webhook URL for Jarvis to communicate with.
             </p>
+            
+            <div className="space-y-2">
+              <Label htmlFor="agentId" className="text-foreground">ElevenLabs Agent ID</Label>
+              <Input
+                id="agentId"
+                value={agentId}
+                onChange={(e) => setAgentId(e.target.value)}
+                placeholder="Enter your ElevenLabs agent ID"
+                className="bg-white/5 border-jarvis-blue/20 focus-visible:ring-jarvis-blue/30"
+              />
+            </div>
             
             <div className="space-y-2">
               <Label htmlFor="webhookUrl" className="text-foreground">Webhook URL</Label>
@@ -64,7 +81,7 @@ const Index = () => {
           
           <DialogFooter>
             <Button 
-              onClick={saveWebhookUrl}
+              onClick={saveSettings}
               className="bg-jarvis-blue hover:bg-jarvis-blue-dark"
             >
               Get Started

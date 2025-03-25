@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -112,4 +111,37 @@
     bg-jarvis-blue/10 border border-jarvis-blue/30 text-jarvis-blue-light
     hover:bg-jarvis-blue/20 hover:border-jarvis-blue/50 hover:text-white hover:blue-glow;
   }
+  
+  .glow-effect {
+    box-shadow: 0 0 25px rgba(14, 165, 233, 0.3);
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* ElevenLabs widget customization */
+  .elevenlabs-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Hide default ElevenLabs widget styling that doesn't match our theme */
+  .elevenlabs-container iframe {
+    background: transparent !important;
+    border: none !important;
+  }
+}
+
+/* Add styles to customize the ElevenLabs widget */
+:root {
+  --elvn-button-bg-color: rgba(14, 165, 233, 0.3);
+  --elvn-button-text-color: #0ea5e9;
+  --elvn-chat-bg-color: transparent;
+  --elvn-user-bubble-bg-color: rgba(14, 165, 233, 0.2);
+  --elvn-user-bubble-text-color: white;
+  --elvn-bot-bubble-bg-color: rgba(14, 165, 233, 0.1);
+  --elvn-bot-bubble-text-color: white;
 }

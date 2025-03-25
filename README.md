@@ -52,8 +52,11 @@ Clone the Repository:
 bash
 Copy
 Edit
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+
+git clone https://github.com/Krishnaa548/Jarvis-web-application.git
+
+cd Jarvis-web-application
+
 Follow the Resource Links:
 Check the documentation for Lovable AI, ElevenLabs, and n8n to understand the integration process.
 

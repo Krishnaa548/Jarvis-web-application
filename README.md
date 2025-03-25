@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Welcome to my project Jarvis
 
 ## Project info
 
@@ -50,7 +50,7 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+## What tech are used for this project?
 
 This project is built with .
 
@@ -66,4 +66,4 @@ Simply open [Lovable](https://lovable.dev/projects/67ed1647-2a35-4d36-afba-6b87a
 
 ## I want to use a custom domain - is that possible?
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This lovable tool don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)

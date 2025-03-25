@@ -43,9 +43,9 @@ const ElevenLabsEmbed: React.FC<ElevenLabsEmbedProps> = ({ agentId, className })
   }, [agentId]);
 
   return (
-    <div ref={containerRef} className={`${className} relative transition-all duration-300 hover:scale-105`}>
+    <div ref={containerRef} className={`${className} fixed bottom-6 right-6 z-50 transition-all duration-300 hover:scale-105`}>
       {/* Animated glow behind the widget */}
-      <div className="absolute inset-0 rounded-lg bg-jarvis-blue/5 blur-md -z-10"></div>
+      <div className="absolute inset-0 rounded-lg bg-jarvis-blue/5 blur-md -z-10 animate-pulse-slow"></div>
       {/* ElevenLabs widget will be injected here */}
     </div>
   );

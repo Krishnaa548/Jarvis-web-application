@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Cpu } from 'lucide-react';
 import ElevenLabsEmbed from './ElevenLabsEmbed';
 
@@ -9,6 +9,31 @@ interface JarvisInterfaceProps {
 
 const JarvisInterface: React.FC<JarvisInterfaceProps> = ({ agentId }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; speed: number; opacity: number; }>>([]);
+  
+  // Generate random particles
+  useEffect(() => {
+    const newParticles = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      speed: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.5 + 0.2,
+    }));
+    setParticles(newParticles);
+    
+    // Animated particle movement
+    const interval = setInterval(() => {
+      setParticles(prev => prev.map(particle => ({
+        ...particle,
+        y: (particle.y + particle.speed) % 100,
+        opacity: Math.sin((Date.now() / 3000) + particle.id) * 0.3 + 0.5,
+      })));
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, []);
   
   useEffect(() => {
     // Create pulse effect for the circuit nodes
@@ -33,20 +58,20 @@ const JarvisInterface: React.FC<JarvisInterfaceProps> = ({ agentId }) => {
       {/* Enhanced background with more circuit elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Horizontal lines */}
-        <div className="absolute top-[10%] left-0 w-[40%] h-px bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute top-[30%] right-0 w-[35%] h-px bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-[25%] left-0 w-[30%] h-px bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-[40%] right-0 w-[45%] h-px bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute top-[20%] left-[30%] w-[30%] h-px bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-[35%] left-[35%] w-[25%] h-px bg-jarvis-blue/30 circuit-line"></div>
+        <div className="absolute top-[10%] left-0 w-[40%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "0" } as React.CSSProperties}></div>
+        <div className="absolute top-[30%] right-0 w-[35%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "2" } as React.CSSProperties}></div>
+        <div className="absolute bottom-[25%] left-0 w-[30%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "4" } as React.CSSProperties}></div>
+        <div className="absolute bottom-[40%] right-0 w-[45%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "1" } as React.CSSProperties}></div>
+        <div className="absolute top-[20%] left-[30%] w-[30%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "3" } as React.CSSProperties}></div>
+        <div className="absolute bottom-[35%] left-[35%] w-[25%] h-px bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "5" } as React.CSSProperties}></div>
         
         {/* Vertical lines */}
-        <div className="absolute top-0 left-[25%] w-px h-[35%] bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-0 left-[65%] w-px h-[28%] bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute top-0 right-[35%] w-px h-[25%] bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-0 right-[15%] w-px h-[45%] bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute top-0 right-[60%] w-px h-[45%] bg-jarvis-blue/30 circuit-line"></div>
-        <div className="absolute bottom-0 left-[20%] w-px h-[40%] bg-jarvis-blue/30 circuit-line"></div>
+        <div className="absolute top-0 left-[25%] w-px h-[35%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "2.5" } as React.CSSProperties}></div>
+        <div className="absolute bottom-0 left-[65%] w-px h-[28%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "4.5" } as React.CSSProperties}></div>
+        <div className="absolute top-0 right-[35%] w-px h-[25%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "1.5" } as React.CSSProperties}></div>
+        <div className="absolute bottom-0 right-[15%] w-px h-[45%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "3.5" } as React.CSSProperties}></div>
+        <div className="absolute top-0 right-[60%] w-px h-[45%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "0.5" } as React.CSSProperties}></div>
+        <div className="absolute bottom-0 left-[20%] w-px h-[40%] bg-jarvis-blue/30 circuit-line" style={{ "--circuit-delay": "5.5" } as React.CSSProperties}></div>
         
         {/* Circuit nodes with glowing effect */}
         <div className="absolute top-[10%] left-[25%] w-2 h-2 border border-jarvis-blue/50 bg-jarvis-blue/10 circuit-node"></div>
@@ -60,6 +85,54 @@ const JarvisInterface: React.FC<JarvisInterfaceProps> = ({ agentId }) => {
 
         {/* Animated particle effects */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.05)_0%,transparent_70%)]"></div>
+        
+        {/* Floating particles */}
+        {particles.map(particle => (
+          <div 
+            key={particle.id}
+            className="absolute rounded-full bg-jarvis-blue"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              opacity: particle.opacity,
+              boxShadow: `0 0 ${particle.size * 2}px rgba(14, 165, 233, ${particle.opacity})`,
+              transition: 'opacity 0.5s ease'
+            }}
+          />
+        ))}
+        
+        {/* DNA-like double helix animation */}
+        <div className="absolute h-[80%] w-[2px] left-[20%] top-[10%] overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div 
+              key={i}
+              className="absolute w-[8px] h-[8px] rounded-full bg-jarvis-blue/40"
+              style={{
+                left: `${Math.sin((i / 20) * Math.PI * 4) * 20}px`,
+                top: `${i * 5}%`,
+                animationDelay: `${i * 0.1}s`,
+                animation: 'pulse 3s infinite ease-in-out'
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="absolute h-[80%] w-[2px] right-[20%] top-[10%] overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div 
+              key={i}
+              className="absolute w-[8px] h-[8px] rounded-full bg-jarvis-blue/40"
+              style={{
+                right: `${Math.sin((i / 20) * Math.PI * 4) * 20}px`,
+                top: `${i * 5}%`,
+                animationDelay: `${i * 0.1}s`,
+                animation: 'pulse 3s infinite ease-in-out'
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       {/* Enhanced central holographic circle with more rings and animations */}
@@ -120,13 +193,11 @@ const JarvisInterface: React.FC<JarvisInterfaceProps> = ({ agentId }) => {
         </div>
       </div>
       
-      {/* ElevenLabs embed (positioned centrally) */}
-      <div className="relative z-20 w-full max-w-2xl mx-auto backdrop-blur-sm bg-black/5 rounded-xl p-4 border border-jarvis-blue/20">
-        <ElevenLabsEmbed 
-          agentId={agentId}
-          className="elevenlabs-container"
-        />
-      </div>
+      {/* ElevenLabs embed is now moved to the bottom right corner via its own CSS */}
+      <ElevenLabsEmbed 
+        agentId={agentId}
+        className="elevenlabs-container"
+      />
     </div>
   );
 };

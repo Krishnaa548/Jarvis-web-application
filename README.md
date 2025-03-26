@@ -5,6 +5,8 @@ Welcome to my project!this repository showcases how to build a voice-controlled 
 Overview
 This project demonstrates how to create a fully functional voice assistant that can:
 
+https://preview--vocal-concierge.lovable.app/
+
 Schedule meetings: Automatically trigger n8n workflows to set up meetings.
 
 Manage calendar events: Delete any unwanted events.
